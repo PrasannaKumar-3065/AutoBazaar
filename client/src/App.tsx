@@ -4,6 +4,8 @@ import { queryClient } from "./lib/queryClient";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { ThemeProvider } from "@/components/ThemeProvider";
+import { AuthProvider } from "@/hooks/use-auth";
+import { ProtectedRoute } from "@/lib/protected-route";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { CartDrawer } from "@/components/CartDrawer";
@@ -12,6 +14,7 @@ import HomePage from "@/pages/HomePage";
 import ProductsPage from "@/pages/ProductsPage";
 import ConsultationPage from "@/pages/ConsultationPage";
 import AppointmentsPage from "@/pages/AppointmentsPage";
+import AuthPage from "@/pages/AuthPage";
 import NotFound from "@/pages/not-found";
 import seatImage from "@assets/stock_images/car_seat_covers_leat_267be475.jpg";
 import headlightImage from "@assets/stock_images/car_led_headlights_a_04453d5d.jpg";
@@ -21,8 +24,9 @@ function Router() {
     <Switch>
       <Route path="/" component={HomePage} />
       <Route path="/products" component={ProductsPage} />
-      <Route path="/consultation" component={ConsultationPage} />
-      <Route path="/appointments" component={AppointmentsPage} />
+      <Route path="/auth" component={AuthPage} />
+      <ProtectedRoute path="/consultation" component={ConsultationPage} />
+      <ProtectedRoute path="/appointments" component={AppointmentsPage} />
       <Route component={NotFound} />
     </Switch>
   );
@@ -54,28 +58,30 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <ThemeProvider>
-        <TooltipProvider>
-          <div className="min-h-screen flex flex-col">
-            <Header
-              cartItemCount={cartItems.reduce((sum, item) => sum + item.quantity, 0)}
-              onCartClick={() => setCartOpen(true)}
-              onSearchChange={(value) => console.log("Search:", value)}
+        <AuthProvider>
+          <TooltipProvider>
+            <div className="min-h-screen flex flex-col">
+              <Header
+                cartItemCount={cartItems.reduce((sum, item) => sum + item.quantity, 0)}
+                onCartClick={() => setCartOpen(true)}
+                onSearchChange={(value) => console.log("Search:", value)}
+              />
+              <main className="flex-1">
+                <Router />
+              </main>
+              <Footer />
+            </div>
+            <CartDrawer
+              open={cartOpen}
+              onOpenChange={setCartOpen}
+              items={cartItems}
+              onUpdateQuantity={handleUpdateQuantity}
+              onRemoveItem={handleRemoveItem}
+              onCheckout={handleCheckout}
             />
-            <main className="flex-1">
-              <Router />
-            </main>
-            <Footer />
-          </div>
-          <CartDrawer
-            open={cartOpen}
-            onOpenChange={setCartOpen}
-            items={cartItems}
-            onUpdateQuantity={handleUpdateQuantity}
-            onRemoveItem={handleRemoveItem}
-            onCheckout={handleCheckout}
-          />
-          <Toaster />
-        </TooltipProvider>
+            <Toaster />
+          </TooltipProvider>
+        </AuthProvider>
       </ThemeProvider>
     </QueryClientProvider>
   );

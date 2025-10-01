@@ -117,6 +117,9 @@ export const insertAppointmentSchema = createInsertSchema(appointments).omit({
 export type InsertUser = z.infer<typeof insertUserSchema>;
 export type User = typeof users.$inferSelect;
 
+// Public user type without sensitive fields
+export type PublicUser = Omit<User, "password">;
+
 export type InsertProduct = z.infer<typeof insertProductSchema>;
 export type Product = typeof products.$inferSelect;
 

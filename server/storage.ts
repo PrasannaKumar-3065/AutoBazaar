@@ -15,8 +15,14 @@ import {
   type InsertAppointment,
 } from "@shared/schema";
 import { randomUUID } from "crypto";
+import session from "express-session";
+import createMemoryStore from "memorystore";
+
+const MemoryStore = createMemoryStore(session);
 
 export interface IStorage {
+  sessionStore: session.Store;
+
   // User methods
   getUser(id: string): Promise<User | undefined>;
   getUserByEmail(email: string): Promise<User | undefined>;
@@ -65,6 +71,7 @@ export interface IStorage {
 }
 
 export class MemStorage implements IStorage {
+  public sessionStore: session.Store;
   private users: Map<string, User>;
   private products: Map<string, Product>;
   private services: Map<string, Service>;
@@ -74,6 +81,9 @@ export class MemStorage implements IStorage {
   private appointments: Map<string, Appointment>;
 
   constructor() {
+    this.sessionStore = new MemoryStore({
+      checkPeriod: 86400000,
+    });
     this.users = new Map();
     this.products = new Map();
     this.services = new Map();
