@@ -32,6 +32,12 @@ export function Header({ cartItemCount = 0, onCartClick, onSearchChange }: Heade
               <Link href="/appointments">
                 <Button variant="ghost" data-testid="link-appointments">Appointments</Button>
               </Link>
+              <Link href="/chat">
+                <Button variant="ghost" data-testid="link-chat">Support Chat</Button>
+              </Link>
+              <Link href="/admin/chat">
+                <Button variant="ghost" data-testid="link-admin-chat">Admin</Button>
+              </Link>
             </nav>
           </div>
 
