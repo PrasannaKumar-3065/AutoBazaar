@@ -28,11 +28,18 @@ AutoParts Pro is an e-commerce and consultation platform for car accessories bui
    - Time slot selection
    - Service duration and pricing
 
-4. **User Authentication**
+4. **Customer Support Chat**
+   - Customer chat page with file upload (images & documents)
+   - Admin chat interface for managing customer conversations
+   - Real-time message display with mock data
+   - Image attachment preview in chat
+   - Customer search and filtering
+
+5. **User Authentication**
    - Login and registration pages
    - Protected routes (ready for backend integration)
 
-5. **Theme Support**
+6. **Theme Support**
    - Light and dark mode toggle
    - Persistent theme preferences
 
@@ -53,11 +60,21 @@ AutoParts Pro is an e-commerce and consultation platform for car accessories bui
 
 ## Current Status
 - Frontend-only application (October 18, 2025)
-- Mock data for products, cart, and appointments
+- Mock data for products, cart, appointments, and chat conversations
 - Authentication bypass in development mode
 - Ready for backend integration
+- SPA routing configured for deployment (vercel.json, _redirects)
+
+## Recent Changes (October 18, 2025)
+- Added customer support chat interface with file upload capabilities
+- Created admin chat page for managing customer conversations
+- Configured SPA routing fallback for deployment
+- Added navigation links for Support Chat and Admin pages
+- Installed @radix-ui/react-avatar and @radix-ui/react-scroll-area
 
 ## Notes
 - The application uses path aliases: `@/` for src and `@assets/` for public
-- All products, cart items, and user data are currently mocked
+- All products, cart items, user data, and chat messages are currently mocked
 - Checkout and booking functionality display alerts pending backend implementation
+- File uploads in chat are frontend-only demos (no actual server storage)
+- Chat pages hide the main header/footer for full-screen experience
