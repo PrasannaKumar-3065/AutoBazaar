@@ -7,7 +7,6 @@ import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Redirect } from "wouter";
-import heroImage from "@assets/stock_images/premium_car_interior_200ed1d2.jpg";
 
 export default function AuthPage() {
   const { user, loginMutation, registerMutation } = useAuth();
@@ -193,7 +192,7 @@ export default function AuthPage() {
       <div className="hidden lg:block relative">
         <div
           className="absolute inset-0 bg-cover bg-center"
-          style={{ backgroundImage: `url(${heroImage})` }}
+          style={{ backgroundImage: `url(/stock_images/premium_car_interior_200ed1d2.jpg)` }}
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/50 to-black/30" />
         <div className="relative h-full flex items-center justify-center p-12 text-white">

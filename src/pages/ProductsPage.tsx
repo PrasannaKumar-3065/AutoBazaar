@@ -7,20 +7,17 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
 import { SlidersHorizontal } from "lucide-react";
-import seatImage from "@assets/stock_images/car_seat_covers_leat_267be475.jpg";
-import headlightImage from "@assets/stock_images/car_led_headlights_a_04453d5d.jpg";
-import interiorImage from "@assets/stock_images/premium_car_interior_200ed1d2.jpg";
 
 //todo: remove mock functionality - all products
 const allProducts = [
-  { id: "1", name: "Premium Leather Seat Covers", price: 4999, originalPrice: 6999, image: seatImage, category: "Interior", badge: "Sale" as const },
-  { id: "2", name: "LED Headlight Kit - Ultra Bright", price: 8999, image: headlightImage, category: "Exterior", badge: "New" as const },
-  { id: "3", name: "Dashboard Phone Mount", price: 799, image: interiorImage, category: "Electronics" },
-  { id: "4", name: "Performance Air Filter", price: 2499, image: headlightImage, category: "Performance" },
-  { id: "5", name: "Car Floor Mats - Waterproof", price: 1999, image: seatImage, category: "Interior" },
-  { id: "6", name: "Rear View Camera System", price: 5999, image: headlightImage, category: "Electronics", badge: "New" as const },
-  { id: "7", name: "Sports Steering Wheel Cover", price: 899, image: interiorImage, category: "Interior" },
-  { id: "8", name: "Fog Light Assembly", price: 3499, image: headlightImage, category: "Exterior" },
+  { id: "1", name: "Premium Leather Seat Covers", price: 4999, originalPrice: 6999, image: "/stock_images/car_seat_covers_leat_267be475.jpg", category: "Interior", badge: "Sale" as const },
+  { id: "2", name: "LED Headlight Kit - Ultra Bright", price: 8999, image: "/stock_images/car_led_headlights_a_04453d5d.jpg", category: "Exterior", badge: "New" as const },
+  { id: "3", name: "Dashboard Phone Mount", price: 799, image: "/stock_images/premium_car_interior_200ed1d2.jpg", category: "Electronics" },
+  { id: "4", name: "Performance Air Filter", price: 2499, image: "/stock_images/car_led_headlights_a_04453d5d.jpg", category: "Performance" },
+  { id: "5", name: "Car Floor Mats - Waterproof", price: 1999, image: "/stock_images/car_seat_covers_leat_267be475.jpg", category: "Interior" },
+  { id: "6", name: "Rear View Camera System", price: 5999, image: "/stock_images/car_led_headlights_a_04453d5d.jpg", category: "Electronics", badge: "New" as const },
+  { id: "7", name: "Sports Steering Wheel Cover", price: 899, image: "/stock_images/premium_car_interior_200ed1d2.jpg", category: "Interior" },
+  { id: "8", name: "Fog Light Assembly", price: 3499, image: "/stock_images/car_led_headlights_a_04453d5d.jpg", category: "Exterior" },
 ];
 
 export default function ProductsPage() {
