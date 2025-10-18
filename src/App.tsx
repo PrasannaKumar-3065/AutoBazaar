@@ -14,6 +14,8 @@ import ProductsPage from "@/pages/ProductsPage";
 import ConsultationPage from "@/pages/ConsultationPage";
 import AppointmentsPage from "@/pages/AppointmentsPage";
 import AuthPage from "@/pages/AuthPage";
+import AdminChatPage from "@/pages/AdminChatPage";
+import CustomerChatPage from "@/pages/CustomerChatPage";
 import NotFound from "@/pages/not-found";
 
 function Router() {
@@ -24,6 +26,8 @@ function Router() {
       <Route path="/auth" component={AuthPage} />
       <Route path="/consultation" component={ConsultationPage} />
       <Route path="/appointments" component={AppointmentsPage} />
+      <Route path="/admin/chat" component={AdminChatPage} />
+      <Route path="/chat" component={CustomerChatPage} />
       <Route component={NotFound} />
     </Switch>
   );
@@ -31,6 +35,10 @@ function Router() {
 
 function App() {
   const [cartOpen, setCartOpen] = useState(false);
+  const currentPath = window.location.pathname;
+  
+  const isChatPage = currentPath.includes('/chat') || currentPath.includes('/admin/chat');
+  
   //todo: remove mock functionality - cart items
   const [cartItems, setCartItems] = useState([
     { id: "1", name: "Premium Leather Seat Covers", price: 4999, quantity: 2, image: "/stock_images/car_seat_covers_leat_267be475.jpg" },
@@ -57,25 +65,31 @@ function App() {
       <ThemeProvider>
         <AuthProvider>
           <TooltipProvider>
-            <div className="min-h-screen flex flex-col">
-              <Header
-                cartItemCount={cartItems.reduce((sum, item) => sum + item.quantity, 0)}
-                onCartClick={() => setCartOpen(true)}
-                onSearchChange={(value) => console.log("Search:", value)}
+            {isChatPage ? (
+              <Router />
+            ) : (
+              <div className="min-h-screen flex flex-col">
+                <Header
+                  cartItemCount={cartItems.reduce((sum, item) => sum + item.quantity, 0)}
+                  onCartClick={() => setCartOpen(true)}
+                  onSearchChange={(value) => console.log("Search:", value)}
+                />
+                <main className="flex-1">
+                  <Router />
+                </main>
+                <Footer />
+              </div>
+            )}
+            {!isChatPage && (
+              <CartDrawer
+                open={cartOpen}
+                onOpenChange={setCartOpen}
+                items={cartItems}
+                onUpdateQuantity={handleUpdateQuantity}
+                onRemoveItem={handleRemoveItem}
+                onCheckout={handleCheckout}
               />
-              <main className="flex-1">
-                <Router />
-              </main>
-              <Footer />
-            </div>
-            <CartDrawer
-              open={cartOpen}
-              onOpenChange={setCartOpen}
-              items={cartItems}
-              onUpdateQuantity={handleUpdateQuantity}
-              onRemoveItem={handleRemoveItem}
-              onCheckout={handleCheckout}
-            />
+            )}
             <Toaster />
           </TooltipProvider>
         </AuthProvider>
