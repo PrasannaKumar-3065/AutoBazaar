@@ -2,7 +2,7 @@ import { LocationBanner } from "@/components/LocationBanner";
 import { AppointmentBooking } from "@/components/AppointmentBooking";
 import { Card, CardContent } from "@/components/ui/card";
 import { CheckCircle2 } from "lucide-react";
-
+import professionalautomot from '@/assets/images/professional_automot_4ef2006d.jpg'
 const benefits = [
   "Expert advice on accessory selection",
   "Professional installation guidance",
@@ -29,7 +29,7 @@ export default function ConsultationPage() {
             <Card className="overflow-hidden">
               <CardContent className="p-0">
                 <img
-                  src="/stock_images/professional_automot_4ef2006d.jpg"
+                  src={professionalautomot}
                   alt="Professional consultation"
                   className="w-full h-64 object-cover"
                 />

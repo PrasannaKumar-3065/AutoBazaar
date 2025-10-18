@@ -17,6 +17,9 @@ import AuthPage from "@/pages/AuthPage";
 import AdminChatPage from "@/pages/AdminChatPage";
 import CustomerChatPage from "@/pages/CustomerChatPage";
 import NotFound from "@/pages/not-found";
+import carSeatCovers from '@/assets/images/car_seat_covers_leat_267be475.jpg';
+import carLedHeadlights from '@/assets/images/car_led_headlights_a_04453d5d.jpg';
+import { Router as WouterRouter } from "wouter";
 
 function Router() {
   return (
@@ -41,9 +44,9 @@ function App() {
   
   //todo: remove mock functionality - cart items
   const [cartItems, setCartItems] = useState([
-    { id: "1", name: "Premium Leather Seat Covers", price: 4999, quantity: 2, image: "/stock_images/car_seat_covers_leat_267be475.jpg" },
-    { id: "2", name: "LED Headlight Kit", price: 8999, quantity: 1, image: "/stock_images/car_led_headlights_a_04453d5d.jpg" },
-  ]);
+  { id: "1", name: "Premium Leather Seat Covers", price: 4999, quantity: 2, image: carSeatCovers },
+  { id: "2", name: "LED Headlight Kit", price: 8999, quantity: 1, image: carLedHeadlights },
+]);
 
   const handleUpdateQuantity = (id: string, quantity: number) => {
     setCartItems(items =>
@@ -65,32 +68,34 @@ function App() {
       <ThemeProvider>
         <AuthProvider>
           <TooltipProvider>
-            {isChatPage ? (
-              <Router />
-            ) : (
-              <div className="min-h-screen flex flex-col">
-                <Header
-                  cartItemCount={cartItems.reduce((sum, item) => sum + item.quantity, 0)}
-                  onCartClick={() => setCartOpen(true)}
-                  onSearchChange={(value) => console.log("Search:", value)}
+            <WouterRouter base="/AutoBazaar"> {/* 👈 add this */}
+              {isChatPage ? (
+                <Router />
+              ) : (
+                <div className="min-h-screen flex flex-col">
+                  <Header
+                    cartItemCount={cartItems.reduce((sum, item) => sum + item.quantity, 0)}
+                    onCartClick={() => setCartOpen(true)}
+                    onSearchChange={(value) => console.log("Search:", value)}
+                  />
+                  <main className="flex-1">
+                    <Router />
+                  </main>
+                  <Footer />
+                </div>
+              )}
+              {!isChatPage && (
+                <CartDrawer
+                  open={cartOpen}
+                  onOpenChange={setCartOpen}
+                  items={cartItems}
+                  onUpdateQuantity={handleUpdateQuantity}
+                  onRemoveItem={handleRemoveItem}
+                  onCheckout={handleCheckout}
                 />
-                <main className="flex-1">
-                  <Router />
-                </main>
-                <Footer />
-              </div>
-            )}
-            {!isChatPage && (
-              <CartDrawer
-                open={cartOpen}
-                onOpenChange={setCartOpen}
-                items={cartItems}
-                onUpdateQuantity={handleUpdateQuantity}
-                onRemoveItem={handleRemoveItem}
-                onCheckout={handleCheckout}
-              />
-            )}
-            <Toaster />
+              )}
+              <Toaster />
+            </WouterRouter>
           </TooltipProvider>
         </AuthProvider>
       </ThemeProvider>
