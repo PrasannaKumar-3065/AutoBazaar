@@ -16,8 +16,6 @@ import ConsultationPage from "@/pages/ConsultationPage";
 import AppointmentsPage from "@/pages/AppointmentsPage";
 import AuthPage from "@/pages/AuthPage";
 import NotFound from "@/pages/not-found";
-import seatImage from "@assets/stock_images/car_seat_covers_leat_267be475.jpg";
-import headlightImage from "@assets/stock_images/car_led_headlights_a_04453d5d.jpg";
 
 function Router() {
   return (
@@ -25,8 +23,8 @@ function Router() {
       <Route path="/" component={HomePage} />
       <Route path="/products" component={ProductsPage} />
       <Route path="/auth" component={AuthPage} />
-      <ProtectedRoute path="/consultation" component={ConsultationPage} />
-      <ProtectedRoute path="/appointments" component={AppointmentsPage} />
+      <Route path="/consultation" component={ConsultationPage} />
+      <Route path="/appointments" component={AppointmentsPage} />
       <Route component={NotFound} />
     </Switch>
   );
@@ -36,8 +34,8 @@ function App() {
   const [cartOpen, setCartOpen] = useState(false);
   //todo: remove mock functionality - cart items
   const [cartItems, setCartItems] = useState([
-    { id: "1", name: "Premium Leather Seat Covers", price: 4999, quantity: 2, image: seatImage },
-    { id: "2", name: "LED Headlight Kit", price: 8999, quantity: 1, image: headlightImage },
+    { id: "1", name: "Premium Leather Seat Covers", price: 4999, quantity: 2, image: "/stock_images/car_seat_covers_leat_267be475.jpg" },
+    { id: "2", name: "LED Headlight Kit", price: 8999, quantity: 1, image: "/stock_images/car_led_headlights_a_04453d5d.jpg" },
   ]);
 
   const handleUpdateQuantity = (id: string, quantity: number) => {

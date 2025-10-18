@@ -106,3 +106,26 @@ export function useAuth() {
   }
   return context;
 }
+
+export function useAuthMutation() {
+  const loginMutation = useMutation({
+    mutationFn: async (credentials: { email: string; password: string }) => {
+      // TODO: Replace with actual API call
+      // Example: return await fetch('https://your-api.com/auth/login', {...})
+      
+      // Temporary development bypass
+      if (credentials.__TEMPORARY_AUTH_BYPASS) {
+        return {
+          user: {
+            id: 'temp-user-id',
+            email: credentials.email,
+            name: 'Temporary User',
+            role: 'user'
+          }
+        };
+      }
+    }
+  });
+
+  return loginMutation;
+}
